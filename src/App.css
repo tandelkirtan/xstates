@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+h1{
+  font-size: 50px;
+}
+.select_button
+{
+  padding: 10px;
+  font-size: 20px;
+  text-align: start;
+  margin: 20px;
+}
