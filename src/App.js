@@ -29,7 +29,12 @@
       }
     }
 
-    const fetchState = async () => {
+    useEffect(() => {
+        fetchCountries();
+    }, [])
+
+    useEffect(() => {
+         const fetchState = async () => {
       try{
         const response = await fetch(`https://location-selector.labs.crio.do/country=${country}/states`);
         const data = await response.json();
@@ -40,7 +45,13 @@
       }
       setStateAllow(true);
     }
+    if(country)
+    {
+      fetchState();
+    }
+    }, [country])
 
+    useEffect(() => {
     const fetchCity = async () => {
       try{
         const response = await fetch(`https://location-selector.labs.crio.do/country=${country}/state=${state}/cities`);
@@ -52,24 +63,12 @@
       }
       setCityAllow(true);
     }
-
-    useEffect(() => {
-        fetchCountries();
-    }, [])
-
-    useEffect(() => {
-      if(country)
-      {
-        fetchState();
-      }
-    }, [country])
-
-    useEffect(() => {
       if(state)
       {
         fetchCity();
       }
-    }, [state])
+
+    }, [country, state])
 
     const handleCountry = (e) => {
       setCountry(e.target.value);
